@@ -1,0 +1,69 @@
+{% connected_content https://deckofcardsapi.com/api/deck/new/draw/?count=4 :save drawCards :no_cache %}
+
+{% assign cardOne = {{drawCards.cards[0].value}} %}
+{% assign cardTwo = {{drawCards.cards[1].value}} %}
+{% assign cardThree = {{drawCards.cards[2].value}} %}
+{% assign cardFour = {{drawCards.cards[3].value}} %}
+
+{% assign cardArray = "1,2,3,4,5,6,7,8,9,10,JACK,QUEEN,KING,ACE" | split: "," %}
+{% assign cardPoints = "1,2,3,4,5,6,7,8,9,10,10,10,10,11" | split: "," %}
+
+{% for card in cardArray %}
+  {% if card == cardOne %}
+    {% assign cardOneIndex = forloop.index0 %}
+    {% assign cardOnePoints = cardOnePoints | plus: cardPoints[cardOneIndex] %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% for card in cardArray %}
+  {% if card == cardTwo %}
+    {% assign cardTwoIndex = forloop.index0 %}
+    {% assign cardTwoPoints = cardTwoPoints | plus: cardPoints[cardTwoIndex] %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% for card in cardArray %}
+  {% if card == cardThree %}
+    {% assign cardThreeIndex = forloop.index0 %}
+    {% assign cardThreePoints = cardThreePoints | plus: cardPoints[cardThreeIndex] %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% for card in cardArray %}
+  {% if card == cardFour %}
+    {% assign cardFourIndex = forloop.index0 %}
+    {% assign cardFourPoints = cardFourPoints | plus: cardPoints[cardFourIndex] %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% assign playerOneTotal = {{cardOnePoints}} | plus: {{cardTwoPoints}} %}
+{% assign playerTwoTotal = {{cardThreePoints}} | plus: {{cardFourPoints}} %}
+
+{% assign randomNumber = 'now' | date: "%N" | modulo: 2 %}
+
+{% if {{playerOneTotal}} > {{playerTwoTotal}} %}
+
+  {% if randomNumber == 0 %}
+    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a02e85d2f00821a6448/original.png?1723206146" %}
+  {% else %}
+    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60c9e76b6ec0063efd5f9/original.png?1723206814" %}
+  {% endif %}
+
+{% elsif {{playerTwoTotal}} > {{playerOneTotal}} %}
+
+  {% if randomNumber == 0 %}
+    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a022245ed0070ea2109/original.png?1723206146" %}
+  {% else %}
+    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a044285620063999237/original.png?1723206147" %}
+  {% endif %}
+
+{% elsif {{playerTwoTotal}} == {{playerOneTotal} }%}
+
+<!-- Draw image not functioning perfect but better than nothing -->
+    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a0233cebb00631e5342/original.png?1723206146" %}
+
+{% endif %}
