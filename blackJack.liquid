@@ -48,22 +48,22 @@
 {% if {{playerOneTotal}} > {{playerTwoTotal}} %}
 
   {% if randomNumber == 0 %}
-    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a02e85d2f00821a6448/original.png?1723206146" %}
+    {% assign winner = "" %} <!-- Insert player one wins image here -->
   {% else %}
-    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60c9e76b6ec0063efd5f9/original.png?1723206814" %}
+    {% assign winner = "" %} <!-- Insert player one wins second image here -->
   {% endif %}
 
 {% elsif {{playerTwoTotal}} > {{playerOneTotal}} %}
 
   {% if randomNumber == 0 %}
-    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a022245ed0070ea2109/original.png?1723206146" %}
+    {% assign winner = "" %} <!-- Insert player two wins image here -->
   {% else %}
-    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a044285620063999237/original.png?1723206147" %}
+    {% assign winner = "" %} <!-- Insert player two wins second image here -->
   {% endif %}
 
 {% elsif {{playerTwoTotal}} == {{playerOneTotal} }%}
 
 <!-- Draw image not functioning perfect but better than nothing -->
-    {% assign winner = "https://braze-images.com/appboy/communication/assets/image_assets/images/66b60a0233cebb00631e5342/original.png?1723206146" %}
+    {% assign winner = "" %} <!-- Insert players draw image here -->
 
 {% endif %}
